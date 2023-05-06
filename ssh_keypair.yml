@@ -1,0 +1,17 @@
+---
+- name: Generate SSH key pair
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    key_name: my-webserver-key
+    key_path: my-webserver-key.pem
+
+  tasks:
+  - name: Generate SSH key pair
+    ssh_keypair:
+      name: "{{ key_name }}"
+      path: "{{ key_path }}"
+      size: 2048
+      state: present

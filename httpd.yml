@@ -1,0 +1,35 @@
+---
+- name: Configure httpd on EC2 instance 1
+  hosts: test-httpd1
+  become: true
+  gather_facts: false
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+
+- name: Configure httpd on EC2 instance 2
+  hosts: test-httpd2
+  become: true
+  gather_facts: false
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+

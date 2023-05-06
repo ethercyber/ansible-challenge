@@ -1,0 +1,46 @@
+---
+- name: Launch EC2 instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    region: ap-southeast-2
+    image_id1: ami-0c55b159cbfafe1f0 # UHHHHH
+    image_id2: ami-0c55b159cbfafe1f0 # UHHHHH
+    instance_type: t2.micro
+    security_group: ansible-secgrp-ethan-web
+    subnet_id: my-subnet-id  # UHHHHH
+    key_name: my-webserver-key
+    count: 1
+
+  tasks:
+  - name: Launch EC2 instance for Web Server 1
+    test-httpd1:
+      key_name: "{{ key_name }}"
+      instance_type: "{{ instance_type }}"
+      image: "{{ image_id1 }}"
+      group: "{{ security_group }}"
+      subnet_id: "{{ subnet_id }}"
+      region: "{{ region }}"
+      count: "{{ count }}"
+      wait: true
+      assign_public_ip: true
+    register: ec2_instance
+
+  - name: Launch EC2 instance for Web Server 2
+    test-httpd2:
+      key_name: "{{ key_name }}"
+      instance_type: "{{ instance_type }}"
+      image: "{{ image_id2 }}"
+      group: "{{ security_group }}"
+      subnet_id: "{{ subnet_id }}"
+      region: "{{ region }}"
+      count: "{{ count }}"
+      wait: true
+      assign_public_ip: true
+    register: ec2_instance
+
+  - name: Print instance information
+    debug:
+      var: ec2_instance.instances[0].public_ip

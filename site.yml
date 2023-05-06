@@ -1,1 +1,47 @@
 ---
+- name: Configure Apache on EC2 instance
+  hosts: ec2
+  become: true
+  gather_facts: false
+
+  vars:
+    http_port: 80
+    server_admin_email: admin@example.com
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Configure Apache virtual host
+    template:
+      src: templates/virtualhost.j2
+      dest: /etc/httpd/conf.d/virtualhost.conf
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+
+  - name: Verify Apache is running
+    uri:
+      url: http://localhost:{{ http_port }}
+      return_content: yes
+    register: result
+    failed_when: "'Hello World' not in result.content"
+
+  - name: Send email notification
+    mail:
+      subject: Apache configured on {{ ansible_host }}
+      body: |
+        Apache has been successfully configured on {{ ansible_host }}.
+
+        Server admin email: {{ server_admin_email }}
+
+      to:
+        - admin@example.com
