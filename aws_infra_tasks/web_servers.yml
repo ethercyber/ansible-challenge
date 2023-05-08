@@ -1,5 +1,5 @@
 ---
-- name: Launch EC2 instance
+- name: Launch EC2 instances, and install Web Services
   hosts: localhost
   connection: local
   gather_facts: false
@@ -34,3 +34,37 @@
   - name: Print instance information
     debug:
       var: ec2_instance.instances[0].public_ip
+
+- name: Configure httpd on EC2 instance 1
+  hosts: test-httpd1
+  become: true
+  gather_facts: false
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+
+- name: Configure httpd on EC2 instance 2
+  hosts: test-httpd2
+  become: true
+  gather_facts: false
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true

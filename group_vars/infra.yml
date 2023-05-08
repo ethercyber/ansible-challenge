@@ -23,3 +23,9 @@
     subnet_id: my-subnet-id  # UHHHHH
     key_name: my-webserver-key
     count: 1
+
+# VPC Variables
+
+    vpc_region: ap-southeast-2
+    vpc_cidr_block: 172.32.0.0/16
+    vpc_subnet_cidr_block: 172.32.1.0/24

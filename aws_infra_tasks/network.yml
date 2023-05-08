@@ -1,13 +1,13 @@
 ---
-- name: Create VPC and Subnet for the Web Servers!
+- name: Create VPC, Subnet, and Security Group for the Web Servers!
   hosts: localhost
   connection: local
   gather_facts: false
 
   vars:
-    region: ap-southeast-2
-    vpc_cidr_block: 172.32.0.0/16
-    subnet_cidr_block: 172.32.1.0/24
+    region: "{{ vpc_region }}"
+    vpc_cidr_block: "{{ vpc_cidr_block }}"
+    subnet_cidr_block: 
 
   tasks:
   - name: Create the VPC
@@ -43,3 +43,10 @@
       route_table_id: "{{ route_table.id }}"
       region: "{{ region }}"
       state: present
+
+  - name: Create security group
+    ec2_group:
+      name: "{{ security_group_name }}"
+      description: "{{ security_group_description }}"
+      region: "{{ region }}"
+      rules: "{{ security_group_rules }}"
