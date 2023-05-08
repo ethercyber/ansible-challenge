@@ -1,12 +1,25 @@
 ---
 
 # Ansible Host Variables
-    region: ap-southeast-2
-    ansible_python_interpreter: /usr/bin/python 
-    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
-    ansible_become_method: sudo
-    ansible_become: true
+
+    host_region: ap-southeast-2
+    host_ansible_python_interpreter: /usr/bin/python 
+    host_ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    host_ansible_become_method: sudo
+    host_ansible_become: true
+    ansible_host: 3.25.129.12
+    ansible_user: ec2-user
+    ansible_ssh_private_key_file: ethans-keypair.pem 
 
 # Ansible Host - Key Pair Variables
-    key_name: my-webserver-key
-    key_path: my-webserver-key.pem
+
+    host_key_name: my-host-key
+    host_key_path: my-host-key.pem
+
+# Ansible Host - Security Group
+
+    host_security_group: deploy-sec-group
+
+# Ansible Host - Networking
+
+    host_subnet_id: subnet-0cc9416d0e734ba37

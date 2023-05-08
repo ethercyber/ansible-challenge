@@ -2,7 +2,7 @@
 
 # Security Group Variables
 
-    security_group_name: ansible-secgrp-ethan-web
+    security_group_name: ansible-secgrp-web
     security_group_description: Ethan's Web Server Ansible Security Group
     security_group_rules:
       - proto: tcp
