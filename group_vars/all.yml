@@ -1,1 +1,11 @@
 ---
+# Global Variables
+    region: ap-southeast-2
+    ansible_python_interpreter: /usr/bin/python 
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    ansible_become_method: sudo
+    ansible_become: true
+
+# Ansible Host - Key Pair Variables
+    key_name: my-webserver-key
+    key_path: my-webserver-key.pem

@@ -4,16 +4,6 @@
   connection: local
   gather_facts: false
 
-  vars:
-    region: ap-southeast-2
-    image_id1: ami-0c55b159cbfafe1f0 # UHHHHH
-    image_id2: ami-0c55b159cbfafe1f0 # UHHHHH
-    instance_type: t2.micro
-    security_group: ansible-secgrp-ethan-web
-    subnet_id: my-subnet-id  # UHHHHH
-    key_name: my-webserver-key
-    count: 1
-
   tasks:
   - name: Launch EC2 instance for Web Server 1
     test-httpd1:

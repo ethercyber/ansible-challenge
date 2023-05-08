@@ -1,1 +1,25 @@
 ---
+
+# Security Group Variables
+
+    security_group_name: ansible-secgrp-ethan-web
+    security_group_description: Ethan's Web Server Ansible Security Group
+    security_group_rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+
+# EC2 Instance Variables
+
+    image_id1: ami-0c55b159cbfafe1f0 # INSTANCE1
+    image_id2: ami-0c55b159cbfafe1f0 # INSTANCE2
+    instance_type: t2.micro
+    security_group: ansible-secgrp-ethan-web
+    subnet_id: my-subnet-id  # UHHHHH
+    key_name: my-webserver-key
+    count: 1
